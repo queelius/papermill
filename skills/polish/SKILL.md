@@ -1,0 +1,132 @@
+---
+name: polish
+description: >-
+  Use for final preparation before submission. Checks formatting, citation
+  completeness, figure quality, abstract word count, LaTeX warnings, and
+  other submission-readiness criteria. Produces a pre-flight checklist.
+---
+
+# Submission Polish
+
+You are performing a final quality check on a research paper before submission. This is the last line of defense -- catch everything that would annoy a reviewer or cause a desk rejection.
+
+## Step 1: Read Context
+
+Read `.papermill.md` for:
+- **Venue**: Target venue and its requirements.
+- **Format**: Paper format (latex, markdown, rmarkdown).
+- **Review history**: Outstanding issues from previous reviews.
+
+Read the complete manuscript.
+
+## Step 2: Pre-Flight Checklist
+
+Work through each category systematically. Report issues as they are found.
+
+### Formatting
+- [ ] Paper compiles without errors
+- [ ] No LaTeX warnings (especially undefined references, missing citations)
+- [ ] Page count within venue limits
+- [ ] Correct venue template/style file used
+- [ ] Margins, font size, and spacing match requirements
+- [ ] Line numbers included if required by venue
+- [ ] Anonymous submission if required (no author names in text or metadata)
+
+### Abstract
+- [ ] Word count within venue limits (typically 150-300 words)
+- [ ] Self-contained (no citations, no undefined terms)
+- [ ] States the problem, approach, main result, and significance
+- [ ] Matches the paper's actual content
+
+### Citations and References
+- [ ] All citations resolve (no "?" in the PDF)
+- [ ] Bibliography is complete (no missing fields)
+- [ ] Citation style matches venue requirements
+- [ ] All references are cited in the text (no orphan bib entries that should be removed)
+- [ ] All cited works are in the bibliography
+- [ ] Self-citations are reasonable in number
+
+### Figures and Tables
+- [ ] All figures are referenced in the text
+- [ ] Figure captions are self-contained (reader should understand without reading the text)
+- [ ] Resolution is sufficient for print (300+ DPI for raster images)
+- [ ] Color is used accessibly (works in grayscale, colorblind-safe)
+- [ ] Tables have clear headers and units
+
+### Mathematical Content
+- [ ] All symbols are defined before use
+- [ ] Notation is consistent throughout
+- [ ] Equation numbering is correct and referenced
+- [ ] Theorem/definition/proof environments are properly labeled
+- [ ] No orphan proofs (every proof has a parent theorem/proposition)
+
+### Writing Quality
+- [ ] No first-person narrative inconsistencies ("I" vs "we")
+- [ ] Consistent tense usage
+- [ ] No obvious typos or grammatical errors
+- [ ] Acronyms defined on first use
+- [ ] No overly long paragraphs (break up walls of text)
+
+### Metadata
+- [ ] Author names and affiliations are correct
+- [ ] ORCID identifiers included if venue supports them
+- [ ] Keywords/subject classification provided
+- [ ] Acknowledgments section present (funding, help, etc.)
+- [ ] Data availability statement if required
+- [ ] Code availability statement if applicable
+
+### Supplementary Material
+- [ ] Appendices are referenced from the main text
+- [ ] Supplementary files are in the required format
+- [ ] Appendix content is not essential to understanding the main paper
+
+## Step 3: Build Verification
+
+For LaTeX papers, run a clean build and check:
+
+```bash
+cd paper && latexmk -pdf main.tex
+```
+
+Report:
+- Number of pages
+- Number of LaTeX warnings
+- Number of undefined references
+- Number of overfull/underfull hbox warnings (prioritize overfull)
+
+## Step 4: Present Results
+
+Present the checklist results:
+
+> **Pre-Flight Report**
+>
+> **Status**: [Ready / Issues found]
+>
+> **Passing**: N/M checks passed
+> **Issues**:
+> 1. [issue + suggested fix]
+> 2. [issue + suggested fix]
+> ...
+
+## Step 5: Fix Issues
+
+Offer to fix issues directly:
+
+- Formatting fixes: Apply them.
+- Content fixes: Suggest specific changes and ask for approval.
+- Style fixes: Propose rewording.
+
+## Step 6: Update State File
+
+After all issues are resolved:
+
+- Set `stage` to `submission` in `.papermill.md`.
+- Append a timestamped note: "Pre-flight check passed. Ready for submission to [venue]."
+
+## Step 7: Suggest Next Steps
+
+> Paper is polished and ready. Final steps:
+>
+> - **Submit**: Follow the venue's submission instructions.
+> - **`/papermill:venue`**: If you haven't selected a venue yet, do so now.
+> - **Archive**: Consider creating a git tag marking the submitted version.
