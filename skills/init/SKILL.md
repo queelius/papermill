@@ -258,14 +258,42 @@ The R package `reliabilitytools` on CRAN implements the methods from both
 papers. DOI: 10.5281/zenodo.XXXXXXX">
 ```
 
-**Important schema notes:**
+**Schema notes:**
 - `stage` must be one of: `idea`, `thesis`, `literature`, `outlining`, `drafting`, `review`, `submission`
 - `format` must be one of: `latex`, `markdown`, `rmarkdown`
 - `orcid` should be the bare identifier (e.g., `0000-0002-1234-5678`), not a URL
-- `thesis.refined` starts as `null` and is populated by the thesis skill
+- `thesis.refined` starts as `null` and is set to `true` by the thesis skill
 - `prior_art.last_survey` is a date string (`YYYY-MM-DD`) or `null`
-- `review_history` is a list of objects added by the review skill
 - Leave empty fields as empty strings `""`, not `null`, unless the schema above specifies `null`
+
+**List field structures** (populated by their respective skills — empty at init):
+
+```yaml
+# Each entry in experiments[] (added by experiment/simulation skills):
+experiments:
+  - name: "descriptive-name"
+    type: "simulation | benchmark | case-study | ablation"
+    hypothesis: "Expected outcome in one sentence"
+    status: "planned | running | completed | failed"
+    script: "path/to/script.R"
+    last_run: null  # YYYY-MM-DD when last executed
+
+# Each entry in review_history[] (added by review skill):
+review_history:
+  - date: "YYYY-MM-DD"
+    type: "self-review"
+    findings_major: 0
+    findings_minor: 0
+    recommendation: "ready | minor-revision | major-revision | not-ready"
+    notes: "Brief summary of key findings"
+
+# Each entry in venue.candidates[] (added by venue skill):
+venue:
+  candidates:
+    - name: "Journal or Conference Name"
+      fit: "high | good | moderate"
+      deadline: "YYYY-MM-DD or rolling"
+```
 
 ---
 

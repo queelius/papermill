@@ -96,10 +96,12 @@ Once approved, update `.papermill.md` (Edit tool):
 
 Append a timestamped note documenting the outline creation.
 
-## Step 7: Suggest Next Step
+## Step 7: Suggest Next Steps
 
-> The outline is set. Suggested next steps:
->
-> - **Start writing**: Begin with the section you feel most confident about. Many authors start with the method/results, not the introduction.
-> - **`/papermill:experiment`**: If experiments are part of the paper, design them now.
-> - **`/papermill:prior-art`**: If the related work section needs more references, survey now.
+Based on what the outline reveals, suggest the most relevant next step:
+
+- If the outline exposed that the thesis is unclear or too broad → "The outlining process suggests the thesis may need sharpening. Consider running `/papermill:thesis` to refine the claim before drafting."
+- If the outline includes a related work section with few references → `/papermill:prior-art`
+- If the outline includes experiment/simulation sections → `/papermill:experiment` or `/papermill:simulation`
+- If the outline includes proof sections → `/papermill:proof`
+- Otherwise → "Begin writing with the section you feel most confident about. Many authors start with the method/results, not the introduction."

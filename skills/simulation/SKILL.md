@@ -19,6 +19,8 @@ Read `.papermill.md` (Read tool) for:
 - **Thesis**: What theoretical result needs validation.
 - **Experiments**: Any existing simulation experiments.
 
+If `.papermill.md` does not exist, ask the user which theoretical result needs validation. Simulation design can proceed without the state file — suggest running `/papermill:init` afterward.
+
 Scan the repository for existing simulation code and results (Glob/Read tools).
 
 ## Step 2: Identify What to Validate
@@ -119,9 +121,9 @@ Append a timestamped note documenting the simulation design.
 
 ## Step 8: Suggest Next Steps
 
-> Simulation designed. Next steps:
->
-> - **Implement**: Write the simulation script. Start with a small pilot (R=100) to debug.
-> - **Run pilot**: Verify the code works and results look reasonable before the full run.
-> - **Full run**: Execute with the designed R and n values.
-> - **`/papermill:review`**: Once results are in the paper, get feedback on presentation.
+Based on the simulation status, suggest the most relevant next step:
+
+- **Implement**: "Write the simulation script. Start with a small pilot (R=100) to debug before the full run."
+- If the simulation validates a proof → "Once results confirm the theory, integrate both the proof and simulation evidence into the paper. Use `/papermill:proof` if the proof itself needs work."
+- If simulation results are surprising or contradict theory → "The simulation suggests the theoretical result may need revisiting. Use `/papermill:proof` to re-examine the proof's assumptions."
+- If results are written up → "Use `/papermill:review` to get feedback on the presentation of simulation results."

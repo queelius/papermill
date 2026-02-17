@@ -15,7 +15,9 @@ Act as a mathematical collaborator helping the researcher develop, verify, and p
 
 ## Step 1: Read Context
 
-Read `.papermill.md` (Read tool) for the thesis and paper context. Read any existing proofs in the manuscript (Read tool).
+Read `.papermill.md` (Read tool) for the thesis and paper context, if it exists. Read any existing proofs in the manuscript (Read tool).
+
+If `.papermill.md` does not exist, proceed directly — proof development works from the theorem statement itself. Suggest running `/papermill:init` afterward to track proof status.
 
 Understand what needs proving:
 - Is this a new proof to construct from scratch?
@@ -95,8 +97,9 @@ Append a note to `.papermill.md` (Edit tool) documenting the proof work:
 
 ## Step 8: Suggest Next Steps
 
-> Proof development complete. Suggested next steps:
->
-> - **Numerical validation**: Use `/papermill:simulation` to verify the result computationally.
-> - **Write up**: Integrate the proof into the paper with proper formatting.
-> - **`/papermill:review`**: Get feedback on the proof's clarity and correctness.
+Based on the proof status, suggest the most relevant next step:
+
+- If the proof establishes a quantitative result (formula, bound, rate) → "Use `/papermill:simulation` to validate the result numerically — demonstrate that empirical behavior matches the theoretical prediction."
+- If the proof depends on assumptions that could be tested → "Use `/papermill:experiment` to design experiments verifying the assumptions hold in practice."
+- If the proof is draft/verified but not yet in the paper → "Integrate the proof into the manuscript with proper LaTeX environments (Theorem, Proof, etc.)."
+- If the proof is complete and in the paper → "Use `/papermill:review` to get feedback on the proof's clarity and correctness."

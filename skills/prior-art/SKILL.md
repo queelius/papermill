@@ -17,10 +17,12 @@ Conduct a **collaborative, iterative** literature survey with the user. This is 
 
 Begin by gathering everything you need to understand the research context.
 
-1. **Read `.papermill.md`** in the project root (Read tool). Extract:
+1. **Read `.papermill.md`** in the project root (Read tool), if it exists. Extract:
    - The thesis statement and core contribution.
    - Any existing `prior_art` entries (key references, gaps, last survey date).
    - The paper's target venue, discipline, and methodology.
+
+   If `.papermill.md` does not exist, the survey can still proceed — ask the user to describe their research topic and thesis directly. Suggest running `/papermill:init` afterward to persist the results.
 
 2. **Read existing `.bib` file(s)** (Glob/Read tools). Scan for all BibTeX files in the project (commonly `references.bib`, `paper/references.bib`, or similar). These are seed references. Parse out author names, titles, years, and keywords -- these seeds will anchor the search.
 
@@ -130,11 +132,25 @@ Append a timestamped note to the markdown body documenting the survey.
 
 ## Step 10: Offer Deep Search
 
-If the user wants broader coverage, offer to launch the **surveyor agent**:
+If the user wants broader coverage, offer to launch the **surveyor agent** (Task tool with `subagent_type: "papermill:surveyor"`):
 
-> I can launch the surveyor agent (`papermill:surveyor`) for a deeper autonomous search. It will systematically explore citation networks and compile an extended reference list. Would you like me to launch it?
+> I can launch the surveyor agent for a deeper autonomous search. It will systematically explore citation networks and compile an extended reference list. Would you like me to launch it?
 
 Only offer this after the interactive survey has established a solid baseline.
+
+When launching, pass the agent:
+- The thesis statement
+- Seed references (existing `.bib` entries or key papers confirmed so far)
+- The search queries from Step 2 (plus any new ones discovered during the survey)
+- The current gap analysis from Step 7
+
+The agent writes its results to `.papermill-survey-results.md` in the project root. After it completes:
+
+1. Read `.papermill-survey-results.md` (Read tool).
+2. Present a summary to the user (number of new references by category, updated gap analysis).
+3. Ask the user to confirm which new references to keep — present them in batches of 3-5, same as Step 6.
+4. Append confirmed BibTeX entries to the `.bib` file (Edit tool).
+5. Update `prior_art` in `.papermill.md` with any new key references and the refined gap analysis (Edit tool).
 
 ## Step 11: Final Summary
 

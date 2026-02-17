@@ -20,6 +20,8 @@ Read `.papermill.md` (Read tool) for:
 - **Existing experiments**: Any previously registered experiments.
 - **Format and tools**: What languages/tools are in the repo (R, Python, C++, etc.).
 
+If `.papermill.md` does not exist, ask the user what claim the experiments should test. Experiment design can proceed without the state file — suggest running `/papermill:init` afterward to register experiments persistently.
+
 Scan the repository for existing code (Glob tool) in `research/`, `code/`, `scripts/`, `experiments/`, or `analysis/` directories.
 
 ## Step 2: Identify What Needs Testing
@@ -92,9 +94,9 @@ Append a timestamped note documenting the experiment design.
 
 ## Step 6: Suggest Next Steps
 
-> The experiment is designed. Next steps:
->
-> - **Implement**: Write the experiment script. Consider `/papermill:simulation` if this is a Monte Carlo study.
-> - **Run**: Execute the experiment and record results.
-> - **Analyze**: Interpret results against the success criteria.
-> - **`/papermill:review`**: Once results are written up, get feedback.
+Based on the experiment type, suggest the most relevant next step:
+
+- If this is a Monte Carlo study → "Use `/papermill:simulation` for detailed simulation design — it covers sample sizes, convergence diagnostics, and result presentation."
+- If the experiment involves proving a theoretical prediction → "Consider `/papermill:proof` to verify the theory before running experiments."
+- If results will need statistical analysis → "Implement the script, run it, then use `/papermill:review` once the results are written up."
+- For all experiments → "Start with a small pilot run to debug before the full experiment."

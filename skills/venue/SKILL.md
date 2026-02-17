@@ -20,6 +20,8 @@ Read `.papermill.md` (Read tool) for:
 - **Prior art**: Where key references are published (reveals relevant venues).
 - **Review history**: Paper quality assessment (determines venue tier).
 
+If `.papermill.md` does not exist, venue selection can still proceed from the manuscript alone, but results will be stronger with thesis and prior-art context. Suggest running `/papermill:init` first for best results.
+
 Read the manuscript (Read tool) to understand scope, length, and contribution type.
 
 ## Step 2: Identify Candidate Venues

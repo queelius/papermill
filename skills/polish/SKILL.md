@@ -21,6 +21,8 @@ Read `.papermill.md` (Read tool) for:
 - **Format**: Paper format (latex, markdown, rmarkdown).
 - **Review history**: Outstanding issues from previous reviews.
 
+If `.papermill.md` does not exist, the pre-flight check can still run — infer the format from the manuscript files and ask the user for the target venue. The checklist works regardless. Suggest running `/papermill:init` to capture venue and format persistently.
+
 Read the complete manuscript (Read tool).
 
 ## Step 2: Pre-Flight Checklist

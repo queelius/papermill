@@ -21,6 +21,8 @@ Read `.papermill.md` (Read tool) for:
 - **Venue**: Target venue (review against its standards and conventions).
 - **Review history**: Any previous reviews and their findings.
 
+If `.papermill.md` does not exist, the review can still proceed by reading the manuscript directly — but the review will be less targeted without thesis and venue context. Note this limitation to the user and suggest running `/papermill:init` first for best results.
+
 Read the complete manuscript (Read tool).
 
 ## Step 2: Review Dimensions
@@ -112,15 +114,28 @@ Append a timestamped note to the markdown body.
 
 ## Step 6: Offer Deep Review
 
-For a more thorough autonomous review, offer to launch the **reviewer agent**:
+For a more thorough autonomous review, offer to launch the **reviewer agent** (Task tool with `subagent_type: "papermill:reviewer"`):
 
-> I can launch the reviewer agent (`papermill:reviewer`) for a deeper review pass. It will systematically check every theorem, equation, and citation. Would you like me to launch it?
+> I can launch the reviewer agent for a deeper review pass. It will systematically check every theorem, equation, and citation. Would you like me to launch it?
+
+When launching, pass the agent:
+- Path to the manuscript file(s)
+- The thesis statement from `.papermill.md`
+- The target venue (if known)
+- Any specific focus areas the user requested
+
+The agent writes its results to `.papermill-review-results.md` in the project root. After it completes:
+
+1. Read `.papermill-review-results.md` (Read tool).
+2. Present a summary of findings to the user (major issue count, minor issue count, recommendation).
+3. Merge the agent's findings into the review record in `.papermill.md` — update the `review_history` entry created in Step 5 with the combined counts and recommendation.
+4. Ask the user which issues to address first.
 
 ## Step 7: Suggest Next Steps
 
-Based on the recommendation:
+Based on the recommendation, suggest the most relevant next step:
 
-- **Ready for submission** --> `/papermill:polish` then `/papermill:venue`
-- **Minor revision** --> Address the minor issues, then re-review
-- **Major revision** --> Address major issues first, then `/papermill:review` again
-- **Not ready** --> Return to earlier skills (thesis, outline, etc.)
+- **Ready for submission** → `/papermill:polish` to prepare, then `/papermill:venue` if no venue is selected yet.
+- **Minor revision** → Address the minor issues, then re-run `/papermill:review`.
+- **Major revision** → Address major issues first. If issues are structural, suggest `/papermill:outline`. If issues are with the argument, suggest `/papermill:thesis`. Then re-run `/papermill:review`.
+- **Not ready** → Identify the root cause. Weak thesis → `/papermill:thesis`. Insufficient evidence → `/papermill:experiment` or `/papermill:simulation`. Missing related work → `/papermill:prior-art`. Proof gaps → `/papermill:proof`.
