@@ -67,7 +67,7 @@ For format mismatches, ask the user: "The state file says `latex` but I also fou
 
 Check for content that the current init flow captures but older versions may not have asked about:
 
-- **Related papers (Step 6)**: If the Notes section does not contain a `## Related Work (own)` heading, run the related-papers question from Step 6. If the user provides context, append it to the notes.
+- **Related work and software (Step 6)**: If the Notes section does not contain a `## Related Work` heading, run the related-work question from Step 6. If the user provides context, append it to the notes.
 - **Author ORCID**: If `authors[].orcid` is empty, check `deets` and offer to fill it in.
 - **Title**: If `title` is empty or looks like a placeholder, re-run title inference from Step 4.
 
@@ -181,23 +181,30 @@ Use your judgment. When in doubt, default to `drafting` if paper content exists,
 
 ---
 
-## Step 6: Ask About Related Work by the Same Author(s)
+## Step 6: Ask About Related Work and Software
 
-Ask the user whether this paper connects to any of their other projects:
+Ask the user whether this paper connects to any of their other projects or software:
 
 > Is this paper related to any of your other work? For example:
 > - Part of a series (e.g., "Part II of...")
 > - Builds on a foundation paper you wrote
 > - A companion covering a different angle of the same research
+> - Has an associated software package (CRAN, PyPI, GitHub, etc.)
 > - Uses results or software from another project
 >
-> If so, briefly describe the relationship. If not, just say "standalone" and we'll move on.
+> If so, briefly describe the relationships. If not, just say "standalone" and we'll move on.
 
 This step is optional — if the user says "standalone" or skips it, proceed without adding anything. Do not press for detail.
 
-If the user describes relationships, note them verbatim for inclusion in the Notes section of `.papermill.md` (Step 7). Do not create structured YAML fields for this — freeform notes are sufficient. Claude Code will read these notes in future sessions and use them as context for thesis refinement, prior-art surveys, and review.
+If the user describes relationships or software, note them verbatim for inclusion in the Notes section of `.papermill.md` (Step 7). Do not create structured YAML fields for this — freeform notes are sufficient. Claude Code will read these notes in future sessions and use them as context for thesis refinement, prior-art surveys, review, and polish (code availability statements, DOI references).
 
-Also check for clues already in the repo: look at CLAUDE.md, README.md, and the bibliography for self-citations or references to sibling projects. If any are found, mention them: "I noticed references to [X] in your bibliography — is that a related project of yours?"
+Also check for clues already in the repo (Read/Glob/Grep tools):
+- CLAUDE.md, README.md for mentions of related papers or packages
+- Bibliography for self-citations or references to sibling projects
+- DESCRIPTION file (R package), setup.py/pyproject.toml (Python package), or package.json (Node) — these indicate associated software
+- CITATION.cff for software DOIs
+
+If any are found, mention them: "I noticed this repo contains a DESCRIPTION file for an R package called `foo` — is the paper about this package? I also see references to [X] in the bibliography — is that related work of yours?"
 
 ---
 
@@ -239,14 +246,16 @@ review_history: []
 Initialized by papermill on <today's date in YYYY-MM-DD format>.
 ```
 
-If the user described related papers in Step 6, append them to the Notes section as a natural-language entry:
+If the user described related papers or software in Step 6, append them to the Notes section as a natural-language entry:
 
 ```markdown
-## Related Work (own)
+## Related Work and Software
 
 <whatever the user said, in their words -- e.g., "This is Part II of the
 reliability series. Part I is in ../reliability-foundations/ and covers the
-asymptotic theory. This paper extends those results to finite samples.">
+asymptotic theory. This paper extends those results to finite samples.
+The R package `reliabilitytools` on CRAN implements the methods from both
+papers. DOI: 10.5281/zenodo.XXXXXXX">
 ```
 
 **Important schema notes:**
