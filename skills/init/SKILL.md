@@ -113,7 +113,27 @@ Use your judgment. When in doubt, default to `drafting` if paper content exists,
 
 ---
 
-## Step 6: Create `.papermill.md`
+## Step 6: Ask About Related Work by the Same Author(s)
+
+Ask the user whether this paper connects to any of their other projects:
+
+> Is this paper related to any of your other work? For example:
+> - Part of a series (e.g., "Part II of...")
+> - Builds on a foundation paper you wrote
+> - A companion covering a different angle of the same research
+> - Uses results or software from another project
+>
+> If so, briefly describe the relationship. If not, just say "standalone" and we'll move on.
+
+This step is optional — if the user says "standalone" or skips it, proceed without adding anything. Do not press for detail.
+
+If the user describes relationships, note them verbatim for inclusion in the Notes section of `.papermill.md` (Step 7). Do not create structured YAML fields for this — freeform notes are sufficient. Claude Code will read these notes in future sessions and use them as context for thesis refinement, prior-art surveys, and review.
+
+Also check for clues already in the repo: look at CLAUDE.md, README.md, and the bibliography for self-citations or references to sibling projects. If any are found, mention them: "I noticed references to [X] in your bibliography — is that a related project of yours?"
+
+---
+
+## Step 7: Create `.papermill.md`
 
 Create the file `.papermill.md` in the repository root with the following structure (Write tool). Fill in all values gathered from the previous steps. Use the exact YAML schema shown below.
 
@@ -151,6 +171,16 @@ review_history: []
 Initialized by papermill on <today's date in YYYY-MM-DD format>.
 ```
 
+If the user described related papers in Step 6, append them to the Notes section as a natural-language entry:
+
+```markdown
+## Related Work (own)
+
+<whatever the user said, in their words -- e.g., "This is Part II of the
+reliability series. Part I is in ../reliability-foundations/ and covers the
+asymptotic theory. This paper extends those results to finite samples.">
+```
+
 **Important schema notes:**
 - `stage` must be one of: `idea`, `thesis`, `literature`, `outlining`, `drafting`, `review`, `submission`
 - `format` must be one of: `latex`, `markdown`, `rmarkdown`
@@ -162,7 +192,7 @@ Initialized by papermill on <today's date in YYYY-MM-DD format>.
 
 ---
 
-## Step 7: Report and Suggest Next Steps
+## Step 8: Report and Suggest Next Steps
 
 After creating `.papermill.md`, display a summary:
 
