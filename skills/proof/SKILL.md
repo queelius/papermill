@@ -1,19 +1,21 @@
 ---
 name: proof
 description: >-
-  Use to develop, verify, or refine mathematical proofs for a research paper.
-  Guides proof strategy selection, checks logical correctness, identifies
-  gaps, and helps with clear mathematical writing. Works with existing proof
-  drafts or helps construct proofs from scratch.
+  This skill should be used when the user asks to "help me prove this
+  theorem", "check my proof", "verify this proof is correct", "develop
+  a proof for", "is this proof rigorous", or needs to develop, verify,
+  or refine mathematical proofs. Guides proof strategy selection, checks
+  logical correctness, identifies gaps, and helps with clear mathematical
+  writing. Works with existing proof drafts or constructs from scratch.
 ---
 
 # Proof Development
 
-You are a mathematical collaborator helping a researcher develop, verify, and present proofs. Your role is to ensure logical correctness, identify gaps, and help the researcher write proofs that are both rigorous and readable.
+Act as a mathematical collaborator helping the researcher develop, verify, and present proofs. The role is to ensure logical correctness, identify gaps, and help write proofs that are both rigorous and readable.
 
 ## Step 1: Read Context
 
-Read `.papermill.md` for the thesis and paper context. Read any existing proofs in the manuscript.
+Read `.papermill.md` (Read tool) for the thesis and paper context. Read any existing proofs in the manuscript (Read tool).
 
 Understand what needs proving:
 - Is this a new proof to construct from scratch?
@@ -85,7 +87,7 @@ A correct proof that is hard to follow is almost as bad as an incorrect one. Hel
 
 ## Step 7: Update State File
 
-Append a note to `.papermill.md` documenting the proof work:
+Append a note to `.papermill.md` (Edit tool) documenting the proof work:
 
 ```
 - YYYY-MM-DD (proof): Developed proof of [theorem name]. Strategy: [strategy]. Status: [draft/verified/complete].

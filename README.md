@@ -16,9 +16,9 @@ Or from any directory containing the plugin:
 claude plugins add .
 ```
 
-## Skills
+## Commands
 
-Invoke skills with `/papermill:<name>` in Claude Code.
+Invoke commands with `/papermill:<name>` in Claude Code. Each command triggers its corresponding skill.
 
 | Skill | Description |
 |-------|-------------|

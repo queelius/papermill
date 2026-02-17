@@ -1,26 +1,28 @@
 ---
 name: prior-art
 description: >-
-  Use to conduct a systematic literature survey for a research paper. Reads
-  thesis from .papermill.md for context, searches academic sources, identifies
-  key references and gaps in existing work, and updates the state file. Can
-  launch the surveyor agent for deep autonomous search.
+  This skill should be used when the user asks to "survey related work",
+  "find prior art", "literature review", "what papers are related to mine",
+  "search for references", or needs to conduct a systematic literature
+  survey. Reads thesis from .papermill.md, searches academic sources,
+  classifies references, identifies gaps, generates BibTeX, and updates
+  the state file. Can launch the surveyor agent for deep autonomous search.
 ---
 
 # Prior Art: Systematic Literature Survey
 
-You are conducting a **collaborative, iterative** literature survey with the user. This is not a one-shot dump of references. You work together to map the landscape of existing work, identify gaps, and position the user's contribution.
+Conduct a **collaborative, iterative** literature survey with the user. This is not a one-shot dump of references -- work together to map the landscape of existing work, identify gaps, and position the user's contribution.
 
 ## Step 1: Read Context
 
 Begin by gathering everything you need to understand the research context.
 
-1. **Read `.papermill.md`** in the project root. Extract:
+1. **Read `.papermill.md`** in the project root (Read tool). Extract:
    - The thesis statement and core contribution.
    - Any existing `prior_art` entries (key references, gaps, last survey date).
    - The paper's target venue, discipline, and methodology.
 
-2. **Read existing `.bib` file(s)**. Scan for all BibTeX files in the project (commonly `references.bib`, `paper/references.bib`, or similar). These are seed references. Parse out author names, titles, years, and keywords -- these seeds will anchor your search.
+2. **Read existing `.bib` file(s)** (Glob/Read tools). Scan for all BibTeX files in the project (commonly `references.bib`, `paper/references.bib`, or similar). These are seed references. Parse out author names, titles, years, and keywords -- these seeds will anchor the search.
 
 3. **Summarize your understanding** back to the user before proceeding. Confirm: "Here is what I understand your paper is about, and here are the N existing references I found. Shall I begin the survey from this starting point?"
 
@@ -40,7 +42,7 @@ Revise the query list based on feedback before searching.
 
 ## Step 3: Search
 
-Use **WebSearch** to query academic sources. For each search query, formulate searches targeting:
+Use **WebSearch** (WebSearch tool) to query academic sources. For each search query, formulate searches targeting:
 
 - Google Scholar (general academic coverage)
 - arXiv (preprints, especially for CS/math/physics/statistics)
@@ -114,11 +116,11 @@ For each confirmed reference that is **not already in the .bib file**:
 3. Include DOI or URL when available.
 4. Present the entries to the user for approval before writing.
 
-After approval, append the new entries to the appropriate `.bib` file.
+After approval, append the new entries to the appropriate `.bib` file (Edit tool).
 
 ## Step 9: Update State File
 
-Update `.papermill.md` with:
+Update `.papermill.md` (Edit tool) with:
 
 - **`prior_art.key_references`**: Add each confirmed reference with citation key, classification, and a one-sentence relation description.
 - **`prior_art.last_survey`**: Set to today's date.

@@ -1,23 +1,25 @@
 ---
 name: thesis
 description: >-
-  Use to extract, refine, or crystallize the central claim and novelty of a
-  research paper. Works on existing drafts (extracts thesis from text) or new
-  ideas (Socratic dialogue to sharpen the claim). Updates .papermill.md with
-  the refined thesis.
+  This skill should be used when the user asks to "define my thesis",
+  "sharpen my research question", "what is my paper's main claim",
+  "extract the thesis from my draft", "crystallize my contribution",
+  or needs to refine the central claim and novelty of a research paper.
+  Works in two modes: extracting the thesis from an existing draft, or
+  Socratic dialogue to sharpen a new idea. Updates .papermill.md.
 ---
 
 # Thesis Extraction and Refinement
 
-You are a collaborative thinking partner helping a researcher crystallize the central claim and novelty of their work. Your goal is to help them arrive at a thesis that is specific, falsifiable, and clearly distinguished from prior work -- stated in a single sentence.
+Act as a collaborative thinking partner helping the researcher crystallize the central claim and novelty of their work. The goal is to arrive at a thesis that is specific, falsifiable, and clearly distinguished from prior work -- stated in a single sentence.
 
 ## Step 1: Read Context
 
-Start by reading `.papermill.md` in the project root to check for existing state (prior thesis drafts, paper metadata, outline, etc.). If the file does not exist, that is fine -- proceed without it.
+Start by reading `.papermill.md` in the project root (Read tool) to check for existing state (prior thesis drafts, paper metadata, outline, etc.). If the file does not exist, that is fine -- proceed without it.
 
 Then determine which mode to operate in:
 
-- **Existing draft mode**: The project contains paper content (`.tex`, `.md`, or other manuscript files). Identify the main manuscript by checking `.papermill.md` for a path, or by scanning for common names (`main.tex`, `paper.tex`, `draft.md`, etc.).
+- **Existing draft mode**: The project contains paper content (`.tex`, `.md`, or other manuscript files). Identify the main manuscript by checking `.papermill.md` for a path, or by scanning for common names (Glob tool: `main.tex`, `paper.tex`, `draft.md`, etc.).
 - **New idea mode**: No substantial paper content exists yet. The researcher is starting from scratch.
 
 ## Step 2a: Existing Draft Mode
@@ -85,7 +87,7 @@ If any check fails, raise it conversationally:
 
 ## Step 4: Update State File
 
-Once the researcher confirms the thesis, update `.papermill.md` with the refined thesis:
+Once the researcher confirms the thesis, update `.papermill.md` with the refined thesis (Edit tool):
 
 ```yaml
 thesis:

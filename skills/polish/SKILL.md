@@ -1,23 +1,27 @@
 ---
 name: polish
 description: >-
-  Use for final preparation before submission. Checks formatting, citation
-  completeness, figure quality, abstract word count, LaTeX warnings, and
-  other submission-readiness criteria. Produces a pre-flight checklist.
+  This skill should be used when the user asks to "polish my paper for
+  submission", "pre-flight check", "is my paper ready to submit",
+  "final check before submission", "prepare for submission", or needs
+  final preparation before submitting a paper. Performs a systematic
+  pre-flight check covering formatting, citations, figures, metadata,
+  and build verification. Produces a checklist report with suggested
+  fixes.
 ---
 
 # Submission Polish
 
-You are performing a final quality check on a research paper before submission. This is the last line of defense -- catch everything that would annoy a reviewer or cause a desk rejection.
+Perform a final quality check on a research paper before submission. This is the last line of defense -- catch everything that would annoy a reviewer or cause a desk rejection.
 
 ## Step 1: Read Context
 
-Read `.papermill.md` for:
+Read `.papermill.md` (Read tool) for:
 - **Venue**: Target venue and its requirements.
 - **Format**: Paper format (latex, markdown, rmarkdown).
 - **Review history**: Outstanding issues from previous reviews.
 
-Read the complete manuscript.
+Read the complete manuscript (Read tool).
 
 ## Step 2: Pre-Flight Checklist
 
@@ -82,17 +86,28 @@ Work through each category systematically. Report issues as they are found.
 
 ## Step 3: Build Verification
 
-For LaTeX papers, run a clean build and check:
+Run a clean build appropriate to the paper format (Bash tool):
 
+**LaTeX papers:**
 ```bash
 cd paper && latexmk -pdf main.tex
 ```
 
+**Markdown papers:**
+```bash
+pandoc paper.md -o paper.pdf
+```
+
+**R Markdown papers:**
+```bash
+Rscript -e "rmarkdown::render('paper.Rmd')"
+```
+
 Report:
 - Number of pages
-- Number of LaTeX warnings
+- Number of warnings (LaTeX warnings, pandoc warnings, R warnings)
 - Number of undefined references
-- Number of overfull/underfull hbox warnings (prioritize overfull)
+- Number of overfull/underfull hbox warnings (LaTeX; prioritize overfull)
 
 ## Step 4: Present Results
 
@@ -120,7 +135,7 @@ Offer to fix issues directly:
 
 After all issues are resolved:
 
-- Set `stage` to `submission` in `.papermill.md`.
+- Set `stage` to `submission` in `.papermill.md` (Edit tool).
 - Append a timestamped note: "Pre-flight check passed. Ready for submission to [venue]."
 
 ## Step 7: Suggest Next Steps

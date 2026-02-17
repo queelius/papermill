@@ -1,19 +1,21 @@
 ---
 name: outline
 description: >-
-  Use to design or refine the structure of a research paper. Generates a
-  section-by-section outline with purpose, key arguments, and estimated length
-  for each section. Adapts to the paper's format and venue conventions.
-  Updates .papermill.md with the outline.
+  This skill should be used when the user asks to "outline my paper",
+  "structure the paper", "design the paper sections", "create a paper
+  outline", "organize my argument", or needs to design or refine paper
+  structure. Generates a section-by-section outline with purpose, key
+  arguments, estimated length, and narrative arc. Adapts to the paper
+  type and venue conventions. Updates .papermill.md.
 ---
 
 # Paper Outline
 
-You are helping a researcher design the structure of their paper. A good outline is the skeleton that determines whether the paper's argument flows logically. Your goal is to produce a section-by-section plan that is specific to this paper, not a generic template.
+Help the researcher design the structure of their paper. A good outline is the skeleton that determines whether the paper's argument flows logically. Produce a section-by-section plan that is specific to this paper, not a generic template.
 
 ## Step 1: Read Context
 
-Read `.papermill.md` for:
+Read `.papermill.md` (Read tool) for:
 - **Thesis**: The central claim and novelty (critical -- the outline serves the thesis).
 - **Prior art**: Key references and gaps (these shape the related work section).
 - **Format**: `latex`, `markdown`, or `rmarkdown` (affects section conventions).
@@ -22,7 +24,7 @@ Read `.papermill.md` for:
 
 If `.papermill.md` does not exist, suggest running `/papermill:init` first.
 
-Also scan existing paper files. If there is already a partial draft, read it to understand what exists.
+Also scan existing paper files (Glob/Read tools). If there is already a partial draft, read it to understand what exists.
 
 ## Step 2: Determine the Paper Type
 
@@ -87,7 +89,7 @@ Iterate until the user approves.
 
 ## Step 6: Update State File
 
-Once approved, update `.papermill.md`:
+Once approved, update `.papermill.md` (Edit tool):
 
 - Set `stage` to `outlining` (or `drafting` if progressing).
 - Append the outline to the markdown body under a `## Outline` heading.

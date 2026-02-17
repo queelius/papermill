@@ -1,18 +1,20 @@
 ---
 name: status
 description: >-
-  Use to see the current state of a paper project. Reads .papermill.md and
-  presents a dashboard with stage, thesis, experiments, reviews, and suggested
-  next actions. Quick orientation for starting a new session on a paper.
+  This skill should be used when the user asks to "show paper status",
+  "where am I on this paper", "what's the state of my paper", "papermill
+  dashboard", or needs orientation on a paper project. Reads .papermill.md
+  and presents a read-only dashboard showing stage, thesis, experiments,
+  review history, venue, and suggested next actions.
 ---
 
 # Status Dashboard
 
-You are presenting a concise project status dashboard for an academic paper managed by Papermill. This skill is **read-only** -- it does not modify any files.
+Present a concise project status dashboard for an academic paper managed by Papermill. This skill is **read-only** -- it does not modify any files.
 
 ## Step 1: Read the project file
 
-Read `.papermill.md` from the repository root.
+Read `.papermill.md` from the repository root (Read tool).
 
 If the file does not exist, stop and display:
 

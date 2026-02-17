@@ -9,7 +9,19 @@ Papermill is a Claude Code plugin for academic research paper lifecycle manageme
 ```
 papermill/
 ├── .claude-plugin/plugin.json    # Plugin manifest
-├── skills/                       # Interactive skills (invoked as /papermill:<name>)
+├── commands/                     # Slash commands (thin wrappers triggering skills)
+│   ├── init.md
+│   ├── status.md
+│   ├── thesis.md
+│   ├── prior-art.md
+│   ├── outline.md
+│   ├── experiment.md
+│   ├── simulation.md
+│   ├── proof.md
+│   ├── review.md
+│   ├── venue.md
+│   └── polish.md
+├── skills/                       # Interactive skills (the core logic)
 │   ├── init/SKILL.md             # Initialize paper project
 │   ├── status/SKILL.md           # Paper state dashboard
 │   ├── thesis/SKILL.md           # Extract/refine central claim
@@ -21,7 +33,7 @@ papermill/
 │   ├── simulation/SKILL.md       # Monte Carlo methodology
 │   ├── proof/SKILL.md            # Proof development
 │   └── polish/SKILL.md           # Submission preparation
-├── agents/                       # Autonomous agents (invoked as papermill:<name>)
+├── agents/                       # Autonomous agents
 │   ├── surveyor.md               # Literature survey agent
 │   └── reviewer.md               # Editorial review agent
 └── CLAUDE.md                     # This file
@@ -29,9 +41,11 @@ papermill/
 
 ## File Formats
 
-**Skills** (`skills/<name>/SKILL.md`): YAML frontmatter with `name` and `description`, followed by markdown body with instructions for Claude.
+**Commands** (`commands/<name>.md`): YAML frontmatter with `description`, followed by a one-line instruction triggering the corresponding skill. Invoked as `/papermill:<name>`.
 
-**Agents** (`agents/<name>.md`): YAML frontmatter with `name`, `description`, `tools`, `model`, and `color`, followed by a system prompt for the autonomous agent.
+**Skills** (`skills/<name>/SKILL.md`): YAML frontmatter with `name` and `description` (third-person with trigger phrases), followed by markdown body with imperative-form instructions and tool annotations.
+
+**Agents** (`agents/<name>.md`): YAML frontmatter with `name`, `description` (with `<example>` blocks), `tools`, `model`, and `color`, followed by a system prompt for the autonomous agent.
 
 ## State File
 

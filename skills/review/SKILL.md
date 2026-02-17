@@ -1,24 +1,27 @@
 ---
 name: review
 description: >-
-  Use to get structured editorial feedback on a paper draft. Checks argument
-  clarity, mathematical correctness, writing quality, and venue fit. Produces
-  an actionable list of findings ranked by severity. Updates .papermill.md
-  with the review record. Can launch the reviewer agent for deep autonomous review.
+  This skill should be used when the user asks to "review my paper",
+  "give me feedback on my draft", "editorial review", "is my paper
+  ready to submit", "check my paper for issues", or needs structured
+  editorial feedback on a paper draft. Evaluates argument, correctness,
+  writing quality, and venue fit. Produces severity-ranked findings.
+  Updates .papermill.md. Can launch the reviewer agent for deeper
+  autonomous review.
 ---
 
 # Editorial Review
 
-You are conducting a thorough editorial review of a research paper. Your goal is to provide actionable feedback that helps the author improve the paper before submission. Be honest, specific, and constructive.
+Conduct a thorough editorial review of a research paper. The goal is to provide actionable feedback that helps the author improve the paper before submission. Be honest, specific, and constructive.
 
 ## Step 1: Read Context
 
-Read `.papermill.md` for:
+Read `.papermill.md` (Read tool) for:
 - **Thesis**: What the paper claims (the review should check if the paper delivers on this claim).
 - **Venue**: Target venue (review against its standards and conventions).
 - **Review history**: Any previous reviews and their findings.
 
-Read the complete manuscript.
+Read the complete manuscript (Read tool).
 
 ## Step 2: Review Dimensions
 
@@ -91,7 +94,7 @@ Provide a brief overall assessment:
 
 ## Step 5: Update State File
 
-Update `.papermill.md`:
+Update `.papermill.md` (Edit tool):
 
 Add a review record to `review_history`:
 

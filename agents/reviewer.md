@@ -5,8 +5,20 @@ description: >-
   draft checking argument structure, mathematical correctness, writing quality,
   citation accuracy, and venue fit. Launch from /papermill:review for thorough
   autonomous analysis.
+
+  <example>
+  Context: User wants a deep autonomous review of their paper draft.
+  user: "Do a thorough review of my paper"
+  assistant: "I'll launch the reviewer agent for a comprehensive autonomous editorial review."
+  </example>
+  <example>
+  Context: User wants every theorem and equation checked systematically.
+  user: "Check all the proofs and equations in my paper"
+  assistant: "I'll launch the reviewer agent to systematically verify every theorem and equation."
+  </example>
 tools:
   - Read
+  - Write
   - Glob
   - Grep
   - Bash

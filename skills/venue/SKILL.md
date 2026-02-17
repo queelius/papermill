@@ -1,24 +1,26 @@
 ---
 name: venue
 description: >-
-  Use to identify and evaluate publication venues for a research paper.
-  Considers scope, impact factor, review timeline, acceptance rate, and
-  fit with the paper's contribution. Produces a ranked shortlist with
-  submission guidance.
+  This skill should be used when the user asks to "where should I submit
+  this paper", "find a venue for my paper", "which journal fits my paper",
+  "evaluate publication venues", "conference or journal for this work",
+  or needs to identify and evaluate publication venues. Considers scope,
+  impact factor, review timeline, acceptance rate, and fit. Produces a
+  ranked shortlist with submission strategy guidance.
 ---
 
 # Venue Selection
 
-You are helping a researcher identify the best publication venue for their paper. The right venue maximizes impact and minimizes wasted review cycles.
+Help the researcher identify the best publication venue for their paper. The right venue maximizes impact and minimizes wasted review cycles.
 
 ## Step 1: Read Context
 
-Read `.papermill.md` for:
+Read `.papermill.md` (Read tool) for:
 - **Thesis**: The core contribution (determines which communities care).
 - **Prior art**: Where key references are published (reveals relevant venues).
 - **Review history**: Paper quality assessment (determines venue tier).
 
-Read the manuscript to understand scope, length, and contribution type.
+Read the manuscript (Read tool) to understand scope, length, and contribution type.
 
 ## Step 2: Identify Candidate Venues
 
@@ -35,7 +37,7 @@ Look at where the paper's key references are published. These venues are likely 
 - **Short/preliminary results**: Workshop papers or letters
 
 ### From web search
-Search for "best venues for [topic]" and check recent calls for papers.
+Search for "best venues for [topic]" and check recent calls for papers (WebSearch tool).
 
 ## Step 3: Evaluate Each Venue
 
@@ -80,7 +82,7 @@ There is no universally correct strategy. Help the user think through the trade-
 
 ## Step 6: Update State File
 
-Update `.papermill.md`:
+Update `.papermill.md` (Edit tool):
 
 ```yaml
 venue:

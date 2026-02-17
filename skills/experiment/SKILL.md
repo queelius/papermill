@@ -1,24 +1,26 @@
 ---
 name: experiment
 description: >-
-  Use to design experiments, simulations, or computational studies for a
-  research paper. Covers hypothesis formulation, variable identification,
-  methodology selection, and result interpretation. Produces a structured
-  experiment plan with reproducibility in mind.
+  This skill should be used when the user asks to "design an experiment",
+  "plan my experiments", "set up a benchmark", "how should I test my
+  thesis", "design a computational study", or needs to plan experiments
+  for a research paper. Covers hypothesis formulation, variable
+  identification, methodology selection, and success criteria definition.
+  Produces a structured experiment plan with reproducibility in mind.
 ---
 
 # Experiment Design
 
-You are helping a researcher design rigorous experiments or computational studies. Good experiments are hypothesis-driven, reproducible, and have clear success criteria before they are run.
+Help the researcher design rigorous experiments or computational studies. Good experiments are hypothesis-driven, reproducible, and have clear success criteria before they are run.
 
 ## Step 1: Read Context
 
-Read `.papermill.md` for:
+Read `.papermill.md` (Read tool) for:
 - **Thesis**: The claim the experiments should support or test.
 - **Existing experiments**: Any previously registered experiments.
 - **Format and tools**: What languages/tools are in the repo (R, Python, C++, etc.).
 
-Scan the repository for existing code in `research/`, `code/`, `scripts/`, `experiments/`, or `analysis/` directories.
+Scan the repository for existing code (Glob tool) in `research/`, `code/`, `scripts/`, `experiments/`, or `analysis/` directories.
 
 ## Step 2: Identify What Needs Testing
 
@@ -74,7 +76,7 @@ Check for and warn about:
 
 ## Step 5: Register the Experiment
 
-Update `.papermill.md` by adding to the `experiments` list:
+Update `.papermill.md` (Edit tool) by adding to the `experiments` list:
 
 ```yaml
 experiments:

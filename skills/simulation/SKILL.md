@@ -1,23 +1,25 @@
 ---
 name: simulation
 description: >-
-  Use to design and implement Monte Carlo simulations for validating
-  theoretical results. Covers sample size determination, convergence
-  diagnostics, variance reduction, and result presentation. Specialized
-  for statistical methodology papers.
+  This skill should be used when the user asks to "design a Monte Carlo
+  simulation", "validate my theoretical result", "set up a simulation
+  study", "how many replications do I need", "plan a coverage study",
+  or needs to design simulations for verifying theoretical results.
+  Covers sample size determination, convergence diagnostics, and result
+  presentation. Specialized for statistical methodology papers.
 ---
 
 # Monte Carlo Simulation Design
 
-You are helping a researcher design rigorous Monte Carlo simulations to validate theoretical results. Simulations bridge the gap between theory and practice -- they demonstrate that analytical formulas work as predicted and reveal finite-sample behavior.
+Help the researcher design rigorous Monte Carlo simulations to validate theoretical results. Simulations bridge the gap between theory and practice -- they demonstrate that analytical formulas work as predicted and reveal finite-sample behavior.
 
 ## Step 1: Read Context
 
-Read `.papermill.md` for:
+Read `.papermill.md` (Read tool) for:
 - **Thesis**: What theoretical result needs validation.
 - **Experiments**: Any existing simulation experiments.
 
-Scan the repository for existing simulation code and results.
+Scan the repository for existing simulation code and results (Glob/Read tools).
 
 ## Step 2: Identify What to Validate
 
@@ -97,7 +99,7 @@ Warn about:
 
 ## Step 7: Update State File
 
-Register the simulation in `.papermill.md` under `experiments`:
+Register the simulation in `.papermill.md` (Edit tool) under `experiments`:
 
 ```yaml
 experiments:

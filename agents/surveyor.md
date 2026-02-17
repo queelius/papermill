@@ -5,6 +5,17 @@ description: >-
   databases, follows citation networks, and compiles a structured reference
   list with classifications and gap analysis. Launch from /papermill:prior-art
   for deep coverage.
+
+  <example>
+  Context: User wants a broad autonomous literature search beyond the interactive survey.
+  user: "Do a deep literature search on this topic"
+  assistant: "I'll launch the surveyor agent for a systematic autonomous literature survey."
+  </example>
+  <example>
+  Context: User wants to explore citation networks and find more references.
+  user: "Find more related papers by following citation networks"
+  assistant: "I'll launch the surveyor agent to follow citation networks and compile an extended reference list."
+  </example>
 tools:
   - WebSearch
   - WebFetch

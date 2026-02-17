@@ -1,21 +1,23 @@
 ---
 name: init
 description: >-
-  Use when starting a new paper project or onboarding an existing paper repo
-  into papermill. Creates or reads the .papermill.md state file with author
-  info, inferred format, and initial stage. Safe to run on existing repos
-  (idempotent). Run this first in any paper repository.
+  This skill should be used when the user asks to "initialize a paper",
+  "start a new paper project", "set up papermill", "onboard this repo",
+  or needs to create the .papermill.md state file. Discovers repo structure,
+  infers format (LaTeX, Markdown, R Markdown), gathers author info, and
+  creates the initial state file. Idempotent -- safe to run on
+  already-initialized repos.
 ---
 
 # Papermill Init
 
-You are initializing a paper repository for use with papermill. Follow every step below in order. Be thorough in discovery but conservative in action -- never overwrite existing state.
+Initialize a paper repository for use with papermill. Follow every step below in order. Be thorough in discovery but conservative in action -- never overwrite existing state.
 
 ---
 
 ## Step 1: Check for Existing State
 
-Look for a file called `.papermill.md` in the repository root.
+Look for a file called `.papermill.md` in the repository root (Read tool).
 
 - **If `.papermill.md` exists**: Read it and display a summary of its contents to the user (title, stage, format, authors). Do NOT overwrite or modify it. Tell the user:
   > This repository is already initialized. Current state is shown above. Use `/papermill:status` to see full details, or delete `.papermill.md` and re-run `/papermill:init` to start fresh.
@@ -25,14 +27,14 @@ Look for a file called `.papermill.md` in the repository root.
 
 ## Step 2: Discover Repository Structure
 
-Search the repository to understand what kind of paper project this is. Look for all of the following and report what you find:
+Search the repository to understand what kind of paper project this is (Glob tool). Look for all of the following and report what you find:
 
 ### Format detection (check in this order)
 
-1. **LaTeX**: Search for `*.tex` files. If found, set `format: latex`.
-2. **R Markdown**: Search for `*.Rmd` files. If found, set `format: rmarkdown`.
-3. **Markdown**: Search for `paper.md`, `manuscript.md`, or any markdown file that looks like a JOSS-style paper (contains `title:` in YAML frontmatter). If found, set `format: markdown`.
-4. If none of the above are found, default to `format: latex` and note that no paper files were detected yet.
+1. **LaTeX**: Search for `*.tex` files (Glob tool). If found, set `format: latex`.
+2. **R Markdown**: Search for `*.Rmd` files (Glob tool). If found, set `format: rmarkdown`.
+3. **Markdown**: Search for `paper.md`, `manuscript.md`, or any markdown file that looks like a JOSS-style paper (contains `title:` in YAML frontmatter) (Glob/Grep tools). If found, set `format: markdown`.
+4. If none of the above are found, ask the user what format they plan to use. Default to `format: latex` if they are unsure.
 
 ### Additional assets
 
@@ -56,7 +58,7 @@ Report a brief inventory of what was found, for example:
 
 ## Step 3: Get Author Information
 
-Try to obtain the primary author's identity using the `deets` CLI tool, which manages personal metadata.
+Try to obtain the primary author's identity using the `deets` CLI tool, which manages personal metadata (Bash tool).
 
 Run these commands (each may fail if deets is not installed -- that is fine):
 
@@ -73,7 +75,7 @@ deets get academic.orcid
   > 2. Your email address
   > 3. Your ORCID (optional, e.g., 0000-0002-1234-5678)
 
-Also check for author info in existing files:
+Also check for author info in existing files (Read/Grep/Bash tools):
 - `\author{}` blocks in `.tex` files
 - `CITATION.cff` author fields
 - Git config (`git config user.name`, `git config user.email`)
@@ -84,7 +86,7 @@ If multiple sources conflict, prefer: deets > tex file > CITATION.cff > git conf
 
 ## Step 4: Infer the Paper Title
 
-Attempt to extract the title automatically:
+Attempt to extract the title automatically (Grep/Read tools):
 
 - **LaTeX**: Search for `\title{...}` in `.tex` files. Handle multiline titles and macro-containing titles.
 - **Markdown/R Markdown**: Look for the first `# heading` or a `title:` field in YAML frontmatter.
@@ -113,7 +115,7 @@ Use your judgment. When in doubt, default to `drafting` if paper content exists,
 
 ## Step 6: Create `.papermill.md`
 
-Create the file `.papermill.md` in the repository root with the following structure. Fill in all values gathered from the previous steps. Use the exact YAML schema shown below.
+Create the file `.papermill.md` in the repository root with the following structure (Write tool). Fill in all values gathered from the previous steps. Use the exact YAML schema shown below.
 
 ```markdown
 ---
