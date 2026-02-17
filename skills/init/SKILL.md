@@ -3,10 +3,11 @@ name: init
 description: >-
   This skill should be used when the user asks to "initialize a paper",
   "start a new paper project", "set up papermill", "onboard this repo",
-  or needs to create the .papermill.md state file. Discovers repo structure,
-  infers format (LaTeX, Markdown, R Markdown), gathers author info, and
-  creates the initial state file. Idempotent -- safe to run on
-  already-initialized repos.
+  "refresh papermill", "update papermill state", or needs to create or
+  update the .papermill.md state file. On new repos: discovers structure,
+  infers format, gathers author info, creates state file. On existing
+  repos: offers refresh mode that adds missing schema fields and new
+  context without overwriting existing data.
 ---
 
 # Papermill Init
@@ -19,9 +20,76 @@ Initialize a paper repository for use with papermill. Follow every step below in
 
 Look for a file called `.papermill.md` in the repository root (Read tool).
 
-- **If `.papermill.md` exists**: Read it and display a summary of its contents to the user (title, stage, format, authors). Do NOT overwrite or modify it. Tell the user:
-  > This repository is already initialized. Current state is shown above. Use `/papermill:status` to see full details, or delete `.papermill.md` and re-run `/papermill:init` to start fresh.
-- **If `.papermill.md` does not exist**: Continue to Step 2.
+- **If `.papermill.md` does not exist**: Continue to Step 2 (fresh initialization).
+- **If `.papermill.md` exists**: Read it, display a summary (title, stage, format, authors), then offer refresh:
+
+  > This repository is already initialized. Current state is shown above.
+  >
+  > Would you like to **refresh** the state file? This will:
+  > - Add any missing YAML fields from the current schema (preserving all existing data)
+  > - Re-discover repo structure for new files or assets
+  > - Ask about anything not yet captured (e.g., related papers)
+  >
+  > Nothing will be overwritten or removed. Or use `/papermill:status` for a quick look.
+
+  If the user declines refresh, stop here. If they accept, proceed to **Refresh Mode** below.
+
+---
+
+## Refresh Mode
+
+Refresh is **additive only** -- it fills gaps without touching existing data. Run through each check below, report what was found, and apply changes only with user confirmation.
+
+### 1. Schema migration
+
+Compare the existing YAML frontmatter against the current schema (shown in Step 7). For each field in the schema that is missing from the file, add it with its default value. Common cases:
+
+- Missing `thesis` block → add with empty `claim`, `novelty`, `refined: null`
+- Missing `prior_art` block → add with empty defaults
+- Missing `experiments` → add as `[]`
+- Missing `venue` block → add with `target: null`, `candidates: []`
+- Missing `review_history` → add as `[]`
+- Missing `authors[].orcid` → add as `""`
+
+Report what was added: "Added N missing fields to bring the state file up to the current schema." If nothing is missing, say so.
+
+### 2. Re-discover repo structure
+
+Run the same discovery as Step 2 (format detection, asset scan). Compare against what the state file already records. Report any new findings:
+
+- New `.bib` files since initialization
+- New code directories (`research/`, `scripts/`, etc.)
+- Format change (e.g., repo now has `.Rmd` files but format says `latex`)
+
+For format mismatches, ask the user: "The state file says `latex` but I also found `.Rmd` files. Should I update the format?" Only update with confirmation.
+
+### 3. Fill in missing context
+
+Check for content that the current init flow captures but older versions may not have asked about:
+
+- **Related papers (Step 6)**: If the Notes section does not contain a `## Related Work (own)` heading, run the related-papers question from Step 6. If the user provides context, append it to the notes.
+- **Author ORCID**: If `authors[].orcid` is empty, check `deets` and offer to fill it in.
+- **Title**: If `title` is empty or looks like a placeholder, re-run title inference from Step 4.
+
+### 4. Report and finish
+
+Display what changed:
+
+> **Refresh complete.**
+>
+> | Action | Details |
+> |--------|---------|
+> | Schema fields added | N (list them) |
+> | New assets discovered | (list or "none") |
+> | Context updated | (what was added or "nothing new") |
+
+Append a timestamped note to the markdown body:
+
+```
+- YYYY-MM-DD (init refresh): Refreshed state file. [brief summary of changes].
+```
+
+Do NOT modify existing field values (stage, thesis, prior_art content, experiments, reviews, venue selections) unless the user explicitly asks. Those are managed by their respective skills.
 
 ---
 
