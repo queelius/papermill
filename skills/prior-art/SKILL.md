@@ -163,6 +163,15 @@ Close with a structured summary:
 > - Suggested positioning: [1-2 sentences]
 > - Coverage assessment: [honest assessment of completeness]
 
+## Step 12: Suggest Next Steps
+
+Based on what the survey revealed, suggest the most relevant next step:
+
+- If the survey exposed that the thesis overlaps heavily with existing work or needs sharpening → "The literature suggests your thesis may need refinement. Consider running `/papermill:thesis` to sharpen the claim."
+- If the survey provides enough context to structure the paper → `/papermill:outline`
+- If the paper needs experiments to differentiate from competing work → `/papermill:experiment`
+- If the paper is already drafted and needs feedback → `/papermill:review`
+
 ## Ground Rules
 
 - **Never fabricate references.** If you are unsure whether a paper exists, say so. Hallucinated citations are worse than missing ones.

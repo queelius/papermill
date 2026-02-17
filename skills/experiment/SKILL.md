@@ -78,7 +78,7 @@ Check for and warn about:
 
 ## Step 5: Register the Experiment
 
-Update `.papermill.md` (Edit tool) by adding to the `experiments` list:
+If `.papermill.md` exists, update it (Edit tool) by adding to the `experiments` list. If it does not exist, skip registration and suggest running `/papermill:init` to persist the experiment.
 
 ```yaml
 experiments:

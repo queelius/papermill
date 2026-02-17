@@ -88,21 +88,21 @@ Work through each category systematically. Report issues as they are found.
 
 ## Step 3: Build Verification
 
-Run a clean build appropriate to the paper format (Bash tool):
+Run a clean build appropriate to the paper format (Bash tool). Use the manuscript path discovered in Step 1 (from `.papermill.md` or by scanning for `.tex`/`.md`/`.Rmd` files with Glob tool). Examples:
 
 **LaTeX papers:**
 ```bash
-cd paper && latexmk -pdf main.tex
+latexmk -pdf <path-to-main.tex>
 ```
 
 **Markdown papers:**
 ```bash
-pandoc paper.md -o paper.pdf
+pandoc <path-to-paper.md> -o paper.pdf
 ```
 
 **R Markdown papers:**
 ```bash
-Rscript -e "rmarkdown::render('paper.Rmd')"
+Rscript -e "rmarkdown::render('<path-to-paper.Rmd>')"
 ```
 
 Report:

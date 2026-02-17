@@ -22,7 +22,7 @@ Read `.papermill.md` (Read tool) for:
 - **Stage**: Current progress.
 - **Venue**: Target venue (affects length, section naming, and emphasis).
 
-If `.papermill.md` does not exist, suggest running `/papermill:init` first.
+If `.papermill.md` does not exist, outlining can still proceed — ask the user to describe the thesis and intended contribution type directly. Suggest running `/papermill:init` afterward to persist the outline.
 
 Also scan existing paper files (Glob/Read tools). If there is already a partial draft, read it to understand what exists.
 

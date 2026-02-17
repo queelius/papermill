@@ -95,7 +95,7 @@ Based on the current project state, suggest exactly one next skill to run. Evalu
 
 1. If the thesis is not defined or empty --> "Consider running `/papermill:thesis` to define your research claim."
 2. If the thesis is defined but no prior art data exists --> "Consider running `/papermill:prior-art` to survey related work."
-3. If no outline exists and the stage is before `outlining` --> "Consider running `/papermill:outline` to structure the paper."
+3. If the markdown body does not contain a `## Outline` section and the stage is before `outlining` --> "Consider running `/papermill:outline` to structure the paper."
 4. If the stage is `drafting` and there is written content --> "Consider running `/papermill:review` to get feedback on the current draft."
 5. If reviews have been conducted and there are unresolved findings --> "Consider running `/papermill:review` to address open findings."
 6. If reviews are done with no unresolved findings --> "Consider running `/papermill:polish` for final editing, or `/papermill:venue` to evaluate target venues."

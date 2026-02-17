@@ -101,7 +101,9 @@ Warn about:
 
 ## Step 7: Update State File
 
-Register the simulation in `.papermill.md` (Edit tool) under `experiments`:
+If `.papermill.md` exists, register the simulation (Edit tool) under `experiments`. If it does not exist, skip registration and suggest running `/papermill:init`.
+
+The entry uses the standard experiment schema with an optional `config` block for simulation-specific parameters:
 
 ```yaml
 experiments:
@@ -111,7 +113,7 @@ experiments:
     status: "planned"
     script: "research/simulate_covariance.R"
     last_run: null
-    config:
+    config:  # simulation-specific extension, not in the base experiment schema
       replications: 5000
       sample_sizes: [50, 100, 200, 500, 1000]
       parameter_configs: 3
